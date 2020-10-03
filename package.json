@@ -1,25 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "makeuc-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kovaciad/makeuc-project.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kovaciad/makeuc-project/issues"
-  },
-  "homepage": "https://github.com/kovaciad/makeuc-project#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-=======
+
   "name": "hackathon-starter",
   "version": "6.0.1",
   "description": "A boilerplate for Node.js web applications",
@@ -111,6 +91,5 @@
   "engines": {
     "node": ">=10.22.1",
     "npm": ">=6.14.6"
->>>>>>> master
   }
 }
