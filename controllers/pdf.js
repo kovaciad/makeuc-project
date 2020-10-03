@@ -1,4 +1,4 @@
-const pdfKit = require('pdfkit');
+const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
 // Takes a "test" object type and an http response. Will return the test object formatted as a pdf
