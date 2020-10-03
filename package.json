@@ -1,5 +1,4 @@
 {
-
   "name": "hackathon-starter",
   "version": "6.0.1",
   "description": "A boilerplate for Node.js web applications",
@@ -69,6 +68,7 @@
     "passport-twitch-new": "^0.0.1",
     "passport-twitter": "^1.0.4",
     "paypal-rest-sdk": "^1.8.1",
+    "pdfkit": "^0.11.0",
     "popper.js": "^1.16.1",
     "pug": "^3.0.0",
     "stripe": "^8.96.0",
