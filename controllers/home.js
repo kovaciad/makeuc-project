@@ -3,6 +3,10 @@
  * Home page.
  */
 
+const React = require('react')
+const ReactDOM = require('react-dom')
+
+
 class Question {
   questionNumber = -1
   question = ""
