@@ -2,11 +2,6 @@ extends layout
 
 block content
     h1 Select a test to download in PDF format
-    script.
-        var changeReq = function(id, req) = {
-            req.body.id = id;
-            console.log(req.body.id);
-        }
+   
     each val,index in pog
-        a.btn.btn-raised(onclick='changeReq(val.testId, req)', role='button')=val.testTitle
-    script(src="../controllers/test.js")
+        a.btn.btn-raised(href=`/${val.testId}/pdfGenerator`)=val.testTitle
