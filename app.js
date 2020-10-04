@@ -148,6 +148,7 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 // This is where our routes start
 app.post('/pdfGenerator', pdfController.makePdf);
+app.get('/testGenerator', homeController.testGenerator);
 
 /**
  * API examples routes.
