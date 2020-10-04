@@ -167,12 +167,6 @@ class Test {
   }
 }
 
-exports.testGenerator = (req, res) => {
-  res.render('testGenerator', {
-    title: 'Test Generator'
-  });
-}
-
 exports.index = (req, res) => {
   res.render('home', {
     title: 'Home'
