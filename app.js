@@ -34,6 +34,7 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const pdfController = require('./controllers/pdf');
+const testController = require('./controllers/test')
 
 /**
  * API keys and Passport configuration.
@@ -147,8 +148,8 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 // This is where our routes start
-app.post('/pdfGenerator', pdfController.makePdf);
-app.get('/testGenerator', homeController.testGenerator);
+app.get('/pdfGenerator', testController.getUserTests);
+app.get('/testGenerator', testController.testGenerator);
 
 /**
  * API examples routes.
