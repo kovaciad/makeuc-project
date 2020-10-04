@@ -181,8 +181,14 @@ exports.getUserTests = (req, res) => {
     });
 }
 
-exports.testGenerator = (req, res) => {
-  res.render('testGenerator', {
-    title: 'Test Generator'
+exports.getTestGenerator = (req, res) => {
+  User.findById(req.user.id, (err, user) => {
+    if (err) return console.error(err);
+    console.log("User ID Edit: " + req.user.id);
+    user.tests.push(new Test());
+
+    res.render('testGenerator', {
+      test: user.tests[user.tests.length - 1]
+    })
   });
 }

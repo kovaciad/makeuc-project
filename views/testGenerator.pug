@@ -2,5 +2,11 @@ extends layout
 
 block content
   h1 Test Generator
-  p.lead I want to die
-  script(src="../controllers/testReact.jsx")
+
+  form(action='/testGenerator', method='POST')
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-right(for='questions') Questions
+        each val, index in test.questionList
+            .col-md-7
+                input.form-control(type='test', name='question' + index, id='question' + index, value=val.question)
+                input.form-control(type='test', name='options' + index, id='options' + index, value=val.options[0])
