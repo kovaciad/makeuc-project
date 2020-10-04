@@ -4,9 +4,21 @@ block content
   h1 Test Generator
 
   form(action='/testGenerator', method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
       .form-group.row
         label.col-md-3.col-form-label.font-weight-bold.text-right(for='questions') Questions
-        each val, index in test.questionList
+        each val, index in test
             .col-md-7
                 input.form-control(type='test', name='question' + index, id='question' + index, value=val.question)
-                input.form-control(type='test', name='options' + index, id='options' + index, value=val.options[0])
+                input.form-control(type='test', name='options' + index, id='options' + index, value=val.answer)
+            .offset-sm-3.col-md-7.pl-3
+            label.col-md-3.col-form-label.font-weight-bold.text-right(for='padding')
+
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-right(for='newQuestions') Insert New Question
+        .col-md-7
+            input.form-control(type='newQuestion', name='questionText', id='questionText', value='Question')
+            input.form-control(type='newQuestionAnswer', name='questionAnswer', id='questionAnswer', value='Answer')
+        .offset-md-3.col-md-7.pl-2
+            button.col-md3.btn.btn-primary(type='submit')
+                i.far.fa-user.fa-sm

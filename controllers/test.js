@@ -181,14 +181,32 @@ exports.getUserTests = (req, res) => {
     });
 }
 
+let testCase = new Test(testTitle = "Test 1");
+let question = new Question(1, "Why is this happening?", "because you can't write code");
+testCase.addQuestion(question);
+
 exports.getTestGenerator = (req, res) => {
   User.findById(req.user.id, (err, user) => {
     if (err) return console.error(err);
     console.log("User ID Edit: " + req.user.id);
-    user.tests.push(new Test());
 
     res.render('testGenerator', {
-      test: user.tests[user.tests.length - 1]
+      test: user.tests
     })
   });
+}
+
+exports.postTestGenerator = (req, res) => {
+  User.findById(req.user.id, (err, user) => {
+    user.tests.push(new Question(user.tests.length, req.body.questionText, req.body.questionAnswer));
+
+    console.log("saving");
+
+    user.save((err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });
+  });
+  res.redirect('back');
 }

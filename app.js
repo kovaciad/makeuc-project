@@ -89,7 +89,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
+  if (req.path === '/api/upload' || req.path === '/testGenerator') {
     // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
     next();
   } else {
@@ -149,6 +149,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 // This is where our routes start
 app.get('/pdfGenerator', testController.getUserTests);
 app.get('/testGenerator', testController.getTestGenerator);
+app.post('/testGenerator', testController.postTestGenerator);
 
 /**
  * OAuth authentication routes. (Sign in)
