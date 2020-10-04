@@ -7,11 +7,13 @@ class Question {
     answer = ""
     points = 0
     options = []
+    testId = 0
   
     constructor(questionNumber, question, answer, points = 1, options = []){
       this.questionNumber = questionNumber;
       this.question = question;
       this.answer = answer;
+      this.testId = Math.round(Math.random() * 10000);
       this.points = points;
       this.options = options;
     }
@@ -202,7 +204,7 @@ exports.getTestGenerator = (req, res) => {
 
 exports.postTestGenerator = (req, res) => {
   User.findById(req.user.id, (err, user) => {
-    user.tests.push(new Question(user.tests.length, req.body.questionText, req.body.questionAnswer));
+    user.tests[user.tests.length].addQuestion(new Question(user.tests.length, req.body.questionText, req.body.questionAnswer));
 
     console.log("saving");
 
