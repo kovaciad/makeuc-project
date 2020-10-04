@@ -62,6 +62,7 @@ class Question {
   class Test {
     questionList = []
     testTitle = ""
+    testId = Math.round(Math.random() * 10000);
   
     constructor(testTitle = "Example Test", questionList = []){
       this.testTitle = testTitle;
@@ -161,10 +162,11 @@ class Question {
     }
   }
 
-exports.updateUserTests = (req, res) => { 
+const updateUserTests = (req, test) => { 
     User.findById(req.user.id, (err, user) => {
-      user.tests.push(req.body.test); // Will need to be a full Test Object
+      user.tests.push(test); // Will need to be a full Test Object
       console.log("User ID Update: " + req.user.id);
+      console.log(req.body.test);
       user.save((err) => {
         if (err) {
           return console.error(err);
@@ -177,12 +179,24 @@ exports.getUserTests = (req, res) => {
     User.findById(req.user.id, (err, user) => {
         if (err) return console.error(err);
         console.log("User ID Get: " + req.user.id);
-        pdfGen.makePdf(user.tests[user.tests.length-1], res);
+        console.log(user.tests);
+        let tempTests = user.tests;
+        res.render('testList', {pog: tempTests, res: req});
     });
 }
 
 exports.testGenerator = (req, res) => {
   res.render('testGenerator', {
     title: 'Test Generator'
+  });
+}
+
+exports.testTest = (req, res) => {
+  updateUserTests(req, {
+    testTitle: "Test Title",
+    questionList: [{question: "Test Question", answer: "Test Answer", points: 0, options: []},
+                   {question: "Test MC Question", answer: "1", points: 0, options: ["Test 1", "Test 2", "Test 3"]},
+                   {question: "Test MC Question", answer: "1", points: 0, options: ["Test 1", "Test 2", "Test 3"]}],
+    testId: Math.round(Math.random()*10)
   });
 }

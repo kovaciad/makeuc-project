@@ -3,8 +3,14 @@ const fs = require('fs');
 const User = require('../models/User');
 
 // Takes a "test" object type and an http response. Will return the test object formatted as a pdf
-exports.makePdf = (test, res) => {
-    if (test == undefined) return console.log("Test did not pass: " + test);
+exports.makePdf = (req, res) => {
+    console.log("I get to makepdf")
+    let test = {};
+    User.findById(req.user.id, (err, user) => {
+        if (err) return console.error(err);
+        let userTest = user.tests.find(obj => toString(obj.testId) == req.body.id);
+        test = userTest;
+    });
     let doc = new PDFDocument();
     let buffers = [];
     doc.on('data', buffers.push.bind(buffers));
@@ -16,7 +22,6 @@ exports.makePdf = (test, res) => {
         .fontSize(14);
     doc.text(title);
     doc.moveDown(2);
-    // let questions = test.questionList;
     let qNdx = 1; // Garbage collection can take this, thx
     
 
@@ -46,7 +51,7 @@ exports.makePdf = (test, res) => {
 
     // Display all of the answers for an answer key
     test.questionList.forEach(element => {
-        doc.text(`${aNdx}. ${element.question}`)
+        doc.text(`${aNdx}. ${element.question}`);
         doc.moveDown(0.5);
         doc.text(`      ${element.answer}`)
             .fontSize(14);

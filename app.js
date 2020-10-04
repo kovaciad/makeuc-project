@@ -147,8 +147,10 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 // This is where our routes start
-app.get('/pdfGenerator', testController.getUserTests);
+app.get('/pdfGenerator/', testController.getUserTests);
 app.get('/testGenerator', testController.testGenerator);
+// For testing
+app.get('/testCaseGenerator', testController.testTest);
 
 /**
  * OAuth authentication routes. (Sign in)
