@@ -6,6 +6,9 @@ block content
   form(action='/testGenerator', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-right(for='testTitle') Test Title:
+        input.form-control(type='testTitle', name='title', id='title', value=test.testTitle)
+      .form-group.row
         label.col-md-3.col-form-label.font-weight-bold.text-right(for='questions') Questions
         each val, index in test
             .col-md-7

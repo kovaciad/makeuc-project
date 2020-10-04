@@ -7,13 +7,11 @@ class Question {
     answer = ""
     points = 0
     options = []
-    testId = 0
-  
+
     constructor(questionNumber, question, answer, points = 1, options = []){
       this.questionNumber = questionNumber;
       this.question = question;
       this.answer = answer;
-      this.testId = Math.round(Math.random() * 10000);
       this.points = points;
       this.options = options;
     }
@@ -197,16 +195,19 @@ exports.getTestGenerator = (req, res) => {
     console.log("User ID Edit: " + req.user.id);
 
     res.render('testGenerator', {
-      test: user.tests
+      test: user.tests[user.tests.length - 1]
     })
   });
 }
 
 exports.postTestGenerator = (req, res) => {
   User.findById(req.user.id, (err, user) => {
-    user.tests[user.tests.length].addQuestion(new Question(user.tests.length, req.body.questionText, req.body.questionAnswer));
+    if (user.tests.length == 0){
+      user.tests.push(new Test());
+    }
+    user.tests[user.tests.length - 1].testTitle = req.body.title;
+    user.tests[user.tests.length - 1].questionList.push(new Question(user.tests.length, req.body.questionText, req.body.questionAnswer));
 
-    console.log("saving");
 
     user.save((err) => {
       if (err) {
