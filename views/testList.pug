@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    h1 Select a test to download in PDF format
+   
+    each val,index in pog
+        a.btn.btn-raised(href=`/${val.testId}/pdfGenerator`)=val.testTitle

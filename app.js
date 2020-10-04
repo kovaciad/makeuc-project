@@ -147,9 +147,12 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 // This is where our routes start
-app.get('/pdfGenerator', testController.getUserTests);
 app.get('/testGenerator', testController.getTestGenerator);
 app.post('/testGenerator', testController.postTestGenerator);
+app.get('/pdfSelector', testController.getUserTests);
+app.get('/:id/pdfGenerator', pdfController.makePdf, (req, res) => {
+  res.send(req.params);
+});
 
 /**
  * OAuth authentication routes. (Sign in)
