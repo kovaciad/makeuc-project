@@ -152,8 +152,6 @@ app.get('/:id/pdfGenerator', pdfController.makePdf, (req, res) => {
   res.send(req.params);
 });
 app.get('/testGenerator', testController.testGenerator);
-// For testing
-app.get('/testCaseGenerator', testController.testTest);
 
 /**
  * OAuth authentication routes. (Sign in)

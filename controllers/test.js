@@ -162,7 +162,7 @@ class Question {
     }
   }
 
-const updateUserTests = (req, test) => { 
+exports.updateUserTests = (req, test) => { 
     User.findById(req.user.id, (err, user) => {
       user.tests.push(test); // Will need to be a full Test Object
       console.log("User ID Update: " + req.user.id);
@@ -188,15 +188,5 @@ exports.getUserTests = (req, res) => {
 exports.testGenerator = (req, res) => {
   res.render('testGenerator', {
     title: 'Test Generator'
-  });
-}
-
-exports.testTest = (req, res) => {
-  updateUserTests(req, {
-    testTitle: "Test Title",
-    questionList: [{question: "Test Question", answer: "Test Answer", points: 0, options: []},
-                   {question: "Test MC Question", answer: "1", points: 0, options: ["Test 1", "Test 2", "Test 3"]},
-                   {question: "Test MC Question", answer: "1", points: 0, options: ["Test 1", "Test 2", "Test 3"]}],
-    testId: Math.round(Math.random()*10)
   });
 }
