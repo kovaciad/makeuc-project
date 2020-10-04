@@ -185,18 +185,32 @@ exports.getUserTests = (req, res) => {
     });
 }
 
-exports.testGenerator = (req, res) => {
-  res.render('testGenerator', {
-    title: 'Test Generator'
+let testCase = new Test(testTitle = "Test 1");
+let question = new Question(1, "Why is this happening?", "because you can't write code");
+testCase.addQuestion(question);
+
+exports.getTestGenerator = (req, res) => {
+  User.findById(req.user.id, (err, user) => {
+    if (err) return console.error(err);
+    console.log("User ID Edit: " + req.user.id);
+
+    res.render('testGenerator', {
+      test: user.tests
+    })
   });
 }
 
-exports.testTest = (req, res) => {
-  updateUserTests(req, {
-    testTitle: "Test Title",
-    questionList: [{question: "Test Question", answer: "Test Answer", points: 0, options: []},
-                   {question: "Test MC Question", answer: "1", points: 0, options: ["Test 1", "Test 2", "Test 3"]},
-                   {question: "Test MC Question", answer: "1", points: 0, options: ["Test 1", "Test 2", "Test 3"]}],
-    testId: Math.round(Math.random()*10)
+exports.postTestGenerator = (req, res) => {
+  User.findById(req.user.id, (err, user) => {
+    user.tests.push(new Question(user.tests.length, req.body.questionText, req.body.questionAnswer));
+
+    console.log("saving");
+
+    user.save((err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });
   });
+  res.redirect('back');
 }
